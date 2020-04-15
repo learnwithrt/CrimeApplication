@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Crime Application</string>
+    <string name="crime_title">Title</string>
+    <string name="crime_title_hint">What was the Crime?</string>
+    <string name="crime_checkbox_label">Solved</string>
+    <string name="crime_details_label">Details</string>
+</resources>
