@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,16 +47,22 @@ public class CrimeListFragment extends Fragment {
     private class CrimeViewHolder extends RecyclerView.ViewHolder{
         private TextView mTitle;
         private TextView mDate;
+        private ImageView mCrimeSolved;
         public CrimeViewHolder(LayoutInflater inflater,ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_crime,parent,false));
             mTitle=itemView.findViewById(R.id.crime_title_view);
             mDate=itemView.findViewById(R.id.crime_date_view);
+            mCrimeSolved=itemView.findViewById(R.id.solved_image);
         }
         //method which is supposed to be called everytime binding is required
         public void bind(Crime crime){
             mCrime=crime;
             mTitle.setText(crime.getTitle());
             mDate.setText(crime.getCrimeDate().toString());
+            //change the image
+            if(!mCrime.isSolved()){//check if the crime is NOT solved
+                mCrimeSolved.setImageResource(R.mipmap.unsolved_icon_foreground);
+            }
         }
     }
     private class CrimeViewAdapter extends  RecyclerView.Adapter<CrimeViewHolder>{
