@@ -33,10 +33,19 @@ public class CrimeLab {
         return mCrimeList;
     }
     //find a crime from the list
-    public Crime findCrimeById(UUID id){
+    public Crime findCrimeById(String id){
         for(Crime c:mCrimeList){
-            if(c.getID().equals(id)){
+            if(c.getID().toString().equals(id)){
                 return c;
+            }
+        }
+        return null;//The crime with this ID doesn't exist
+    }
+    //find a crime from the list
+    public Crime findCrimeByTitle(String title){
+        for(Crime c:mCrimeList){
+            if(c.getTitle().equals(title)){
+                return c;//crime found
             }
         }
         return null;//The crime with this ID doesn't exist

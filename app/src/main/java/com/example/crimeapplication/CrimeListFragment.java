@@ -1,6 +1,8 @@
 package com.example.crimeapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,12 +46,14 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecycler.setAdapter(mCrimeViewAdapter);
     }
 
-    private class CrimeViewHolder extends RecyclerView.ViewHolder{
+    private class CrimeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mTitle;
         private TextView mDate;
         private ImageView mCrimeSolved;
         public CrimeViewHolder(LayoutInflater inflater,ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_crime,parent,false));
+            //set the click listener on this itemview
+            itemView.setOnClickListener(this);
             mTitle=itemView.findViewById(R.id.crime_title_view);
             mDate=itemView.findViewById(R.id.crime_date_view);
             mCrimeSolved=itemView.findViewById(R.id.solved_image);
@@ -63,6 +67,13 @@ public class CrimeListFragment extends Fragment {
             if(!mCrime.isSolved()){//check if the crime is NOT solved
                 mCrimeSolved.setImageResource(R.mipmap.unsolved_icon_foreground);
             }
+        }
+        //what to do when the view is clicked
+        @Override
+        public void onClick(View v) {
+            //Intent intent=new Intent(getActivity(),MainActivity.class);
+            Intent intent=MainActivity.newIntent(getActivity(),mTitle.getText().toString());
+            startActivity(intent);
         }
     }
     private class CrimeViewAdapter extends  RecyclerView.Adapter<CrimeViewHolder>{
